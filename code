@@ -1,0 +1,110 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+#include <stdbool.h>
+
+struct Pelatis{
+    int vath1;              //exetasi
+    int vath2;
+    int vath3;
+};
+struct Joint{
+    int angle;      // robotiko xeri xeirourgisis matiou
+    int max;
+    int min;
+    int heig;
+};
+bool exet(int vath1,int vath2,int vath3);
+int main(){
+    printf("Parakalo kataxoriste ta apotelesmata tis ejetasis\n");
+    int i;
+    int vath[3];
+    for(i=0;i<3;i++){
+        scanf("%d",&vath[i]);
+    }
+    struct Pelatis pelatis1;
+    pelatis1.vath1=vath[0];
+    pelatis1.vath2=vath[1];
+    pelatis1.vath3=vath[2];
+    bool e;
+    e=exet(pelatis1.vath1,pelatis1.vath2,pelatis1.vath3);// edo krinetai ama xreiazetai ejetasi 
+    
+    
+    if(e == false){
+        printf("You need surgery\n");
+        
+        struct Joint rhand;
+        rhand.angle=45;
+        rhand.max=90;
+        rhand.min=0;
+        rhand.heig=5;
+        
+        struct Joint lhand;
+        lhand.angle=135;
+        lhand.max=180;
+        lhand.min=91;
+        lhand.heig=5;
+        
+        while(lhand.angle<180 && rhand.angle>0){
+            printf("Right hand or Left hand (R/L):");
+            char c;
+            
+            do{
+            scanf("%c",&c);
+            }while(c != 'R' && c !='L');
+            
+            if(c == 'R'){
+                printf("Degree of right robotic hand rotation :");
+                int angle;
+                scanf("%d",&angle);
+                if(rhand.angle+angle<rhand.max && rhand.angle+angle>rhand.min){
+                    rhand.angle=rhand.angle+angle;
+                    printf("The right hand turned to %d degrees.\n",rhand.angle);
+                }else{
+                    printf("Please give an other option");
+                }
+                printf("Centimeters of right robotic hand height :");
+                int h;
+                scanf("%d",&h);
+                if(rhand.heig+h>0){
+                    rhand.heig+=h;
+                    printf("The distance is %d",rhand.heig);
+                }else{
+                    printf("Close to eye's area\n");
+                }
+                
+            }else{ // aristero heri
+                 printf("Degree of left robotic hand rotation :");
+                 int angle1;
+                 scanf("%d",&angle1);
+                if(lhand.angle+angle1>lhand.min && lhand.angle+angle1<lhand.max){
+                    lhand.angle=lhand.angle+angle1;
+                    printf("The right left turned to %d degrees.\n",lhand.angle);
+                }else{
+                    printf("Please give an other option");
+                }
+                printf("Centimeters of left robotic hand height :");
+                int h1;
+                scanf("%d",&h1);
+                if(lhand.heig+h1>0){
+                    lhand.heig+=h1;
+                    printf("The distance is %d\n",lhand.heig);
+                }else{
+                    printf("Close to eye's area\n");
+                }
+            }
+            
+        }
+}else{
+    printf("den xriazeste ejetasi");
+}//if 
+}// int main
+
+
+bool exet(int vath1,int vath2,int vath3){
+    if(vath1>5 && vath2>5 && vath3>5){
+        return true;
+    }else
+        return false;
+    }
