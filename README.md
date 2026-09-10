@@ -1,2 +1,2 @@
-# robotic-hand-simulator
+# robotic-hand-simulation
 A simple robotic hand simulator developed in C.
